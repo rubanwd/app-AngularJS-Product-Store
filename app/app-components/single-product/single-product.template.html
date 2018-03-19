@@ -1,0 +1,18 @@
+<div class="container">
+	
+	<img ng-src="{{$ctrl.mainImageUrl}}" class="single-product" />
+
+	<h1>{{$ctrl.singleProduct.name}}</h1>
+
+	<ul class="single-product-thumbs">
+	  <li ng-repeat="img in $ctrl.singleProduct.images">
+	    <img ng-src="{{img}}" ng-click="$ctrl.setImage(img)" />
+	  </li>
+	</ul>
+
+	<h4 class="price">Price: {{$ctrl.singleProduct.price | currency}}</h4>
+
+	<p>{{$ctrl.singleProduct.description}}</p>
+
+</div>
+

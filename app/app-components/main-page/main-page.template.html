@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <h1>Main</h1>
+    <div class="col-md-12 top-filer">
+
+       <div class="form-group row">
+        <div class="col-md-3">
+          <label for="ex1">Search:</label>
+          <input class="form-control" ng-model="$ctrl.query" />
+        </div>
+        <div class="col-md-3">
+          <label for="ex2">Sort by:</label>
+          <select class="form-control" ng-model="$ctrl.orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+          </select>
+        </div>
+      </div> 
+
+    </div>
+    
+    <div class="col-md-12">
+      
+      <div class="row">
+         <ul class="product">
+            <li class="col-md-3 col-sm-6" ng-repeat="product in $ctrl.product | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+
+               <p>
+                  <a href="#!/single-product/{{product._id}}" class="thumb">
+                     <img ng-src="{{product.images[0]}}" alt="{{product.name}}" />
+                  </a>
+               </p>
+
+               <p>
+                  <a href="#!/single-product/{{product._id}}">{{product.name}}</a>
+               </p>
+               
+               <p>{{product.snippet}}</p>
+
+            </li>
+         </ul>
+      </div> 
+
+    </div>
+  </div>
+</div>
+
+
+
+
+

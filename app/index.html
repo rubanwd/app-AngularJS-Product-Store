@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" ng-app="storeApp">
+  <head>
+    
+    <meta charset="utf-8">
+    <title>Product Store</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+    <script src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+
+
+
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+
+    <script src="api/api.module.js"></script>
+    <script src="api/api.service.js"></script>
+
+    <script src="app-components/main-page/main-page.module.js"></script>
+    <script src="app-components/main-page/main-page.component.js"></script>
+
+    <script src="app-components/single-product/single-product.module.js"></script>
+    <script src="app-components/single-product/single-product.component.js"></script>
+
+    <script src="app-components/edit-store/edit-store.module.js"></script>
+    <script src="app-components/edit-store/edit-store.component.js"></script>
+
+    <script src="app-components/edit-product/edit-product.module.js"></script>
+    <script src="app-components/edit-product/edit-product.component.js"></script>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <div class="col-md-12">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/#!/">Product Store</a>
+          </div>
+          <button type="button" class="navbar-toggle pull-right" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav pull-right">
+
+              <li>
+                <a href="/#!/">Home</a>
+              </li>
+              <li>
+                <a href="/#!/edit-store">Edit Store</a>
+              </li>
+            </ul>
+
+          </div>
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+          <div ng-view class="view-frame"></div>
+      </div>
+    </div>
+
+    <footer class="container-fluid">
+      
+      <div class="container">
+        <div class="col-md-12">
+          <p>Online Store Copyright</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

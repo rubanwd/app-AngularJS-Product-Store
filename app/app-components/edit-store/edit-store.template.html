@@ -1,0 +1,178 @@
+<div class="container">
+  <div class="row">
+    <h1>Edit Product</h1>
+    <div class="col-md-12 top-filer">
+       <div class="form-group row">
+        <div class="col-md-3">
+          <label for="ex1">Search:</label>
+          <input class="form-control" ng-model="$ctrl.query" />
+        </div>
+        <div class="col-md-3">
+          <label for="ex2">Sort by:</label>
+          <select class="form-control" ng-model="$ctrl.orderProp">
+            <option value="name">Alphabetical</option>
+            <option value="age">Newest</option>
+          </select>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="add-product-container">
+        <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">Add New Product</button>
+        <div id="demo" class="collapse add-product-form">
+            
+            
+
+
+            <form class="form-horizontal" name="addForm" novalidate>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Product Title</label>
+                <div class="col-sm-10">
+                  <input type="text" name="fullTitle" class="form-control" ng-model="$ctrl.newProduct.name" placeholder="Enter Product Title" required>
+                  <span style="color:red" ng-show="addForm.fullTitle.$touched">
+                    <span ng-show="addForm.fullTitle.$error.required">Product Title is required.</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Snippet</label>
+                <div class="col-sm-10">
+                  <input type="text" name="snippet" class="form-control" ng-model="$ctrl.newProduct.snippet" placeholder="Enter Short Description" required>
+                  <span style="color:red" ng-show="addForm.snippet.$touched">
+                    <span ng-show="addForm.snippet.$error.required">Full Title is required.</span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Description</label>
+                <div class="col-sm-10">
+                  <input type="text" name="description" class="form-control" ng-model="$ctrl.newProduct.description" placeholder="Enter Full Description" required>
+                  <span style="color:red" ng-show="addForm.description.$touched">
+                    <span ng-show="addForm.description.$error.required">Description is required.</span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Price</label>
+                <div class="col-sm-10">
+                  <input type="number" name="price" class="form-control" ng-model="$ctrl.newProduct.price" placeholder="129 (shold be number)" required>
+                  <span style="color:red" ng-show="addForm.price.$touched">
+                    <span ng-show="addForm.price.$error.required">Price is required.</span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="control-label col-sm-2">Upload Image</label>
+                <div class="col-sm-10">
+                  <button ngf-select="$ctrl.uploadFiles($files, $invalidFiles)" multiple
+                      accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                  Select Files</button>
+                <br><br>
+                Files:
+                <ul class="files-result">
+                  <li ng-repeat="f in $ctrl.files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+                    <span class="progress" ng-show="f.progress >= 0">
+                      <div style="width:{{f.progress}}%"  
+                          ng-bind="f.progress + '%'"></div>
+                    </span>
+                  </li>
+                  <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}
+                  </li> 
+                </ul>
+                {{errorMsg}}
+
+              </div>
+
+            </div>
+
+              
+
+            <div class="alert alert-info" ng-if="$ctrl.message">
+              <a href="#" onclick="return false" class="close" ng-click="$ctrl.clearMessage()">&times;</a>
+                {{$ctrl.message}}
+            </div>
+            
+              
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-disabled="!addForm.fullTitle.$valid || !addForm.snippet.$valid || !addForm.description.$valid || !addForm.price.$valid"
+                class="btn btn-primary" ng-click="$ctrl.saveProduct()">Save New Product</button>
+              </div>
+            </div>
+
+          </form> 
+        </div>
+      </div>
+
+    </div>
+
+
+    
+
+
+    <div class="col-md-12">
+      
+      <div class="row">
+         <ul class="product edit-product">
+            <li class="col-md-3 col-sm-6" ng-repeat="product in $ctrl.product | filter:$ctrl.query | orderBy:$ctrl.orderProp">
+               	<p class="product-photo">
+                	<a href="#!/edit-product/{{product._id}}" class="thumb">
+                     	<img ng-src="{{product.images[0]}}" alt="{{product.name}}" />
+                  	</a>
+               	</p>
+               	<p>
+                  	<a href="#!/edit-product/{{product._id}}">{{product.name}}</a>
+               	</p>
+               
+               	<p class="product-description">{{product.snippet}}</p>
+
+
+				<div class="edit-buttons">
+					<a href="#!/edit-product/{{product._id}}" type="button" class="btn btn-primary">Edit</a>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete" ng-click="$ctrl.selectProduct(product)">Delete</button>
+				</div>
+               
+
+            </li>
+         </ul>
+      </div> 
+
+    </div>
+  </div>
+
+
+<div id="myModalDelete" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Are you sure?</h4>
+                </div>
+                <div class="modal-body">
+                    <strong style="color: red;">
+                        You are going to delete this product.
+                    </strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="$ctrl.deleteProduct()">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+
+</div>
+

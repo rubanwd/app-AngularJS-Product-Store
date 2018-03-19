@@ -1,0 +1,83 @@
+<div class="alert alert-info" ng-if="$ctrl.message">
+    <a href="#" onclick="return false" class="close" ng-click="$ctrl.clearMessage()">&times;</a>
+    {{$ctrl.message}}
+</div>
+
+<div class="container">
+
+	<img ng-src="{{$ctrl.mainImageUrl}}" class="single-product" />
+
+	<h1>{{$ctrl.singleProduct.name}}</h1>
+
+	<ul class="single-product-thumbs">
+	  <li ng-repeat="img in $ctrl.singleProduct.images">
+	    <img ng-src="{{img}}" ng-click="$ctrl.setImage(img)" />
+	  </li>
+	</ul>
+
+	<h4 class="price">Price: {{$ctrl.singleProduct.price | currency}}</h4>
+
+	<p>{{$ctrl.singleProduct.description}}</p>
+
+
+	<div class="container">
+
+	  	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Edit Product</button>
+
+	  <!-- Modal -->
+	  	<div class="modal fade" id="myModal" role="dialog">
+	    	<div class="modal-dialog modal-lg">
+	      		<div class="modal-content">
+	        		<div class="modal-header">
+	          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+	          			<h4 class="modal-title">Modal Header</h4>
+	        		</div>
+	        		<div class="modal-body">
+	          			<form class="form-horizontal">
+
+							<div class="form-group">
+				                <label class="control-label col-sm-2">Name</label>
+		          				<div class="col-sm-10">
+					                <input type="text" class="form-control" ng-model="$ctrl.singleProduct.name" value="$ctrl.singleProduct.name">
+					            </div>
+					        </div>
+
+					        <div class="form-group">
+				                <label class="control-label col-sm-2">Snippet</label>
+				                <div class="col-sm-10">
+				                  	<input type="text" class="form-control" rows="6" ng-model="$ctrl.singleProduct.snippet" value="$ctrl.singleProduct.snippet">
+				                </div>
+				            </div>
+
+				            <div class="form-group">
+				                <label class="control-label col-sm-2">Description</label>
+				                <div class="col-sm-10">
+				                  	<textarea class="form-control" rows="6" ng-model="$ctrl.singleProduct.description" value="$ctrl.singleProduct.description"></textarea>
+				                </div>
+				            </div>
+
+				            <div class="form-group">
+				                <label class="control-label col-sm-2">Price ($)</label>
+		          				<div class="col-sm-10">
+					                <input type="number" class="form-control" ng-model="$ctrl.singleProduct.price" value={{$ctrl.singleProduct.price}}>
+					            </div>
+					        </div>
+
+				            <div class="form-group">
+				                <div class="col-sm-offset-2 col-sm-10">
+				                  	<button class="btn btn-primary" data-dismiss="modal" ng-click="$ctrl.saveEdit()">Save All Changes</button>
+				                </div>
+				            </div>
+
+				        </form>
+
+	        		</div>
+	        		<div class="modal-footer">
+	          			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        		</div>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
+</div>
+
